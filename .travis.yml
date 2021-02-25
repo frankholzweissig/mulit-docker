@@ -14,3 +14,10 @@ after_success:
   - docker build -t frankholzweissig/multi-docker-nginx  ./nginx
   - docker build -t frankholzweissig/multi-docker-server ./server
   - docker build -t frankholzweissig/multi-docker-worker ./worker
+  # Log in  to the docker CLi
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images an push them to docker hub
+  - docker push frankholzweissig/multi-docker-client
+  - docker push frankholzweissig/multi-docker-nginx
+  - docker push frankholzweissig/multi-docker-server
+  - docker push frankholzweissig/multi-docker-worker
